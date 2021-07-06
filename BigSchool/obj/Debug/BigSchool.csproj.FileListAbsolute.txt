@@ -105,3 +105,4 @@ D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CoreCompileInpu
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CopyComplete
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
+D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.AssemblyReference.cache
