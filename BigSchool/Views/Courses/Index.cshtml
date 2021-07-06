@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<BigSchool.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+@using BigSchool.Models;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@{ 
+    var sysFind = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+    <div>
+        <ul>
+    @foreach (var item in Model)
+    {
+            <li>
+                @sysFind.FindById(item.LectureId).Name -
+                @Html.DisplayFor(modelItem => item.DateTime)
+
+            </li>
+    }
+        </ul>
+
+    </div>
+         
+        
+
+</table>
