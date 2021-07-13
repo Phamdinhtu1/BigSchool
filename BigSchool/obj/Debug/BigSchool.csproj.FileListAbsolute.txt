@@ -106,3 +106,9 @@ D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CopyComplete
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.AssemblyReference.cache
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.xml

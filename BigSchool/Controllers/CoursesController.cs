@@ -53,6 +53,27 @@ namespace BigSchool.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Mine()
+        {
+            ApplicationUser currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()); var userID = User.Identity.GetUserId();
+            BigSchoolContext context = new BigSchoolContext();
+            var courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
+            return View(courses);
+
+        }
+        public ActionResult Attending()
+        {
+            BigSchoolContext context = new BigSchoolContext();
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            var listAtten = context.Attendances.Where(m => m.Attendee == user.Id).ToList();
+            var courses = new List<Course>();
+            foreach (Attendance tmp in listAtten)
+            {
+                Course obj = tmp.Course;
+                courses.Add(obj);
+            }
+            return View(courses);
+        }
 
         // POST: Courses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -142,6 +163,6 @@ namespace BigSchool.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        
+
     }
 }

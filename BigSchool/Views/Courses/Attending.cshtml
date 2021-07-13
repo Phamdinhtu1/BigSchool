@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<BigSchool.Models.Course>
+
+@{
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BigSchool.Models;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@{
+    var sysFind = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+}
+
+<div class="row" style="margin:16px 0;">
+    <ul class="course">
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @item.DateTime.ToString("MM")
+                    </div>
+                    <div class="day">
+                        @item.DateTime.ToString("dd")
+                    </div>
+                </div>
+                <div class="detail">
+                    <span class="lecture">
+                        @sysFind.FindById(item.LectureId).Name
+                    </span>
+                    <span class="category">
+                        @item.Category.Name
+                    </span>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

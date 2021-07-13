@@ -13,24 +13,58 @@
     var sysFind = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
 }
 
+<div class="row">
+    <ul class="course">
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @item.DateTime.ToString("MM")                        
+                    </div>
+                    <div class="day">
+                        @item.DateTime.ToString("dd")                        
+                    </div>
+                    
+                </div>
+                <div class="details">
+                    <span class="lecture">
+                        @sysFind.FindById(item.LectureId).Name
+                    </span>
+                    <span class="category">
+                        @item.Category.Name
+                    </span>
+                    <button data-course-id="@item.Id" class="btn btn-default btn-sm js-tongle-attendances">Going?</button>
+                </div>
+
+            </li>
+        }
+    </ul>
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@*@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".js-tongle-attendances").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { Id: button.attr("data-course-id") })
+                    .done(function () {
+                        alert("Register course succesfully");
+                        button
+                            .removeClass("btn-default")
+                            .addClass("btn-info")
+                            .text("Going");
+                    }).fail(function () {
+                        alert("Somthing fail");
+                    })
+            })
+        });
+    </script>
+}*@
 
-    <div>
-        <ul>
-    @foreach (var item in Model)
-    {
-            <li>
-                @sysFind.FindById(item.LectureId).Name -
-                @Html.DisplayFor(modelItem => item.DateTime)
-
-            </li>
-    }
-        </ul>
-
-    </div>
+   
          
         
 
-</table>
