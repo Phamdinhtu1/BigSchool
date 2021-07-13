@@ -28,14 +28,17 @@
                 </div>
                 <div class="details">
                     <span class="lecture">
-                        @sysFind.FindById(item.LectureId).Name
+                        @sysFind.FindById(item.LectureId).Name <br/>
                     </span>
                     <span class="category">
                         @item.Category.Name
                     </span>
 
                 </div>
-
+                <div class="action">
+                    <a href="@Url.Action("Edit","Courses",new { id=item.Id})">Edit</a>
+                    <a href="@Url.Action("Delete","Courses",new { id=item.Id})">Delete</a>
+                </div>
             </li>
         }
     </ul>

@@ -44,25 +44,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@*@section scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".js-tongle-attendances").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/attendances", { Id: button.attr("data-course-id") })
-                    .done(function () {
-                        alert("Register course succesfully");
-                        button
-                            .removeClass("btn-default")
-                            .addClass("btn-info")
-                            .text("Going");
-                    }).fail(function () {
-                        alert("Somthing fail");
-                    })
-            })
-        });
-    </script>
-}*@
+
 
    
          

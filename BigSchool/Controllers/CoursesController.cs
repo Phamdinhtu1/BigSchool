@@ -57,7 +57,7 @@ namespace BigSchool.Controllers
         {
             ApplicationUser currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()); var userID = User.Identity.GetUserId();
             BigSchoolContext context = new BigSchoolContext();
-            var courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
+            List<Course> courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
             return View(courses);
 
         }
@@ -93,19 +93,24 @@ namespace BigSchool.Controllers
         //}
 
         // GET: Courses/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Course course = db.Courses.Find(id);
-        //    if (course == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(course);
-        //}
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()); var userID = User.Identity.GetUserId();
+            BigSchoolContext context = new BigSchoolContext();
+            Course courses = db.Courses.Find(id);
+            courses.ListCategory = context.Categories.ToList();
+            //var courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
+            //List<Course> courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
+            if (courses == null)
+            {
+                return HttpNotFound();
+            }
+            return View(courses);
+        }
 
         //// GET: Courses/Details/5
         //public ActionResult Details(int? id)
@@ -124,44 +129,47 @@ namespace BigSchool.Controllers
         //// POST: Courses/Edit/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
         //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,LectureId,Place,DateTime,CategoryId")] Course course)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(course).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(course);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,LectureId,Place,DateTime,CategoryId")] Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(course).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(course);
+        }
 
         //// GET: Courses/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Course course = db.Courses.Find(id);
-        //    if (course == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(course);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return View(course);
+        }
 
-        //// POST: Courses/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Course course = db.Courses.Find(id);
-        //    db.Courses.Remove(course);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        // POST: Courses/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Course course = db.Courses.Find(id);
+
+            Attendance attendance = db.Attendances.Find(id,course.LectureId);
+            db.Attendances.Remove(attendance);
+            db.Courses.Remove(course);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
 
     }
