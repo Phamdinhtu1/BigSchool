@@ -55,22 +55,26 @@ namespace BigSchool.Controllers
         }
         public ActionResult Mine()
         {
+            //BigSchoolContext context = new BigSchoolContext();
+            //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            //var listAtten = context.Attendances.Where(m => m.Attendee == user.Id).ToList();
+            //List<Course> courses = context.Courses.Where(c => c.DateTime > DateTime.Now).ToList();
+            //var course1 = new List<Course>();
+            //foreach (Attendance tmp in listAtten)
+            //{
+            //    foreach  (Course c in courses)
+            //    {
+            //        if (tmp.CourseId==c.Id)
+            //        {
+            //            course1.Add(c);
+            //        }
+            //    }
+            //}
+            //return View(course1);
             BigSchoolContext context = new BigSchoolContext();
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            var listAtten = context.Attendances.Where(m => m.Attendee == user.Id).ToList();
-            List<Course> courses = context.Courses.Where(c => c.DateTime > DateTime.Now).ToList();
-            var course1 = new List<Course>();
-            foreach (Attendance tmp in listAtten)
-            {
-                foreach  (Course c in courses)
-                {
-                    if (tmp.CourseId==c.Id)
-                    {
-                        course1.Add(c);
-                    }
-                }
-            }
-            return View(course1);
+            List<Course> courses = context.Courses.Where(c =>c.LectureId==user.Id).ToList();
+            return View(courses);
         }
         public ActionResult Attending()
         {
