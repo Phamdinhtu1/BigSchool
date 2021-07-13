@@ -11,8 +11,8 @@
 @{
     var sysFind = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
 }
-
-<div class="row" style="margin:16px 0;">
+<h2>Attending</h2>
+<div class="row">
     <ul class="course">
         @foreach (var item in Model)
         {
@@ -25,9 +25,9 @@
                         @item.DateTime.ToString("dd")
                     </div>
                 </div>
-                <div class="detail">
+                <div class="details">
                     <span class="lecture">
-                        @sysFind.FindById(item.LectureId).Name
+                        @sysFind.FindById(item.LectureId).Name<br />
                     </span>
                     <span class="category">
                         @item.Category.Name

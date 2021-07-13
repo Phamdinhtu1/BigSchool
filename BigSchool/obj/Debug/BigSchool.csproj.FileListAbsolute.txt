@@ -69,7 +69,10 @@ D:\New folder (3)\BigSchool\BigSchool\bin\Microsoft.Owin.Security.Twitter.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\Microsoft.Web.Infrastructure.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\Newtonsoft.Json.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\Owin.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Helpers.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Mvc.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Optimization.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Razor.dll
@@ -77,6 +80,11 @@ D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.WebPages.Deployment.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.WebPages.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.WebPages.Razor.dll
 D:\New folder (3)\BigSchool\BigSchool\bin\WebGrease.dll
+D:\New folder (3)\BigSchool\BigSchool\bin\EntityFramework.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\EntityFramework.SqlServer.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.xml
+D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Helpers.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Mvc.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Optimization.xml
@@ -86,8 +94,6 @@ D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.WebPages.Deployment.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.WebPages.Razor.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\Newtonsoft.Json.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\Antlr3.Runtime.pdb
-D:\New folder (3)\BigSchool\BigSchool\bin\EntityFramework.xml
-D:\New folder (3)\BigSchool\BigSchool\bin\EntityFramework.SqlServer.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\Microsoft.AspNet.Identity.Core.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\New folder (3)\BigSchool\BigSchool\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -105,10 +111,3 @@ D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CoreCompileInpu
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.CopyComplete
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.dll
 D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.pdb
-D:\New folder (3)\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.AssemblyReference.cache
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.dll
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.dll
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.dll
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Net.Http.Formatting.xml
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.xml
-D:\New folder (3)\BigSchool\BigSchool\bin\System.Web.Http.WebHost.xml

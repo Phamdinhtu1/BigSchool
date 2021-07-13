@@ -55,11 +55,22 @@ namespace BigSchool.Controllers
         }
         public ActionResult Mine()
         {
-            ApplicationUser currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()); var userID = User.Identity.GetUserId();
             BigSchoolContext context = new BigSchoolContext();
-            List<Course> courses = context.Courses.Where(c => c.LectureId == currentUser.Id && c.DateTime > DateTime.Now).ToList();
-            return View(courses);
-
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            var listAtten = context.Attendances.Where(m => m.Attendee == user.Id).ToList();
+            List<Course> courses = context.Courses.Where(c => c.DateTime > DateTime.Now).ToList();
+            var course1 = new List<Course>();
+            foreach (Attendance tmp in listAtten)
+            {
+                foreach  (Course c in courses)
+                {
+                    if (tmp.CourseId==c.Id)
+                    {
+                        course1.Add(c);
+                    }
+                }
+            }
+            return View(course1);
         }
         public ActionResult Attending()
         {
@@ -112,23 +123,6 @@ namespace BigSchool.Controllers
             return View(courses);
         }
 
-        //// GET: Courses/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Course course = db.Courses.Find(id);
-        //    if (course == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(course);
-        //}
-        //// POST: Courses/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,LectureId,Place,DateTime,CategoryId")] Course course)
@@ -163,14 +157,30 @@ namespace BigSchool.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Course course = db.Courses.Find(id);
-
-            Attendance attendance = db.Attendances.Find(id,course.LectureId);
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            Attendance attendance = db.Attendances.Find(id,user.Id);
             db.Attendances.Remove(attendance);
-            db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
 
+        //// GET: Courses/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Course course = db.Courses.Find(id);
+        //    if (course == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(course);
+        //}
+        //// POST: Courses/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
     }
 }
