@@ -19,9 +19,65 @@ namespace BigSchool.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
-        }
+            BigSchoolContext context = new BigSchoolContext();
+            var upcommingCourse = context.Courses.Where(p => p.DateTime >DateTime.Now).OrderBy(p => p.DateTime).ToList();
+            //lấy user login hiện tại 
+            var userID = User.Identity.GetUserId();
+            foreach (Course i in upcommingCourse)
+            {
+                //tìm Name của user từ lectureid
+                ApplicationUser user =
+                System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(
+                ).FindById(i.LectureId);
+                i.Name = user.Name;
+                //lấy ds tham gia khóa học 
+                if (userID != null)
+                {
+                    i.isLogin = true;
+                    //ktra user đó chưa tham gia khóa học 
+                    Attendance find = context.Attendances.FirstOrDefault(p =>p.CourseId == i.Id && p.Attendee == userID);
+                    if (find == null)
+                        i.isShowGoing = true;
+                    //ktra user đã theo dõi giảng viên của khóa học ? 
+                    Following findFollow = context.Followings.FirstOrDefault(p =>p.FollowerID == userID && p.FolloweeID == i.LectureId);
+                    if (findFollow == null)
+                        i.isShowFollow = true;
+                }
+            }
+            return View(upcommingCourse);
+            //return View(db.Courses.ToList());
 
+        }
+        public ActionResult LectureIamGoing()
+        {
+            ApplicationUser currentUser =
+           System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+            .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            BigSchoolContext context = new BigSchoolContext();
+            //danh sách giảng viên được theo dõi bởi người dùng (đăng nhập) hiện tại
+            var listFollwee = context.Followings.Where(p => p.FollowerID ==
+            currentUser.Id).ToList();
+            //danh sách các khóa học mà người dùng đã đăng ký
+            var listAttendances = context.Attendances.Where(p => p.Attendee ==
+            currentUser.Id).ToList();
+            var courses = new List<Course>();
+            foreach (var course in listAttendances)
+            {
+                foreach (var item in listFollwee)
+                {
+                    if (item.FolloweeID == course.Course.LectureId)
+                    {
+                        Course objCourse = course.Course;
+                        objCourse.LectureName =
+                       System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                        .FindById(objCourse.LectureId).Name;
+                        courses.Add(objCourse);
+                    }
+                }
+
+            }
+            return View(courses);
+        }
 
         // GET: Courses/Create
         public ActionResult Create()

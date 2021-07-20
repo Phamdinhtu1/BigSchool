@@ -34,5 +34,11 @@ namespace BigSchool.Models
 
         public virtual Category Category { get; set; }
         public List<Category> ListCategory = new List<Category>();
+
+        public bool isLogin = false;
+        public bool isShowGoing = false;
+        public bool isShowFollow = false;
+        public string Name;
+        public string LectureName;
     }
 }

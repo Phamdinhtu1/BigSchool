@@ -1,6 +1,5 @@
 ﻿
 @model IEnumerable<BigSchool.Models.Course>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,12 +28,37 @@
                 </div>
                 <div class="details">
                     <span class="lecture">
-                        @sysFind.FindById(item.LectureId).Name
+                        @*@sysFind.FindById(item.LectureId).Name*@
+                        @item.Name
+                        @if (item.isLogin)
+                        {
+                            if (item.isShowFollow)
+                            {
+                                <button data-user-id="@item.LectureId" class="btn btn-default btn-sm js-tongle-follow">Follow</button><br/>
+                            }
+                            else
+                            {
+                                <button data-user-id="@item.LectureId" class="btn btn-success btn-sm js-tongle-follow">Following</button><br/>
+
+                            }
+                        }
                     </span>
                     <span class="category">
                         @item.Category.Name
+                        @if (item.isLogin)
+                        {
+                            if (item.isShowGoing)
+                            {
+                                <button data-course-id="@item.Id" class="btn btn-default btn-sm js-tongle-attendances">Going?</button><br/>
+
+                            }
+                            else
+                            {
+
+                                <button data-course-id="@item.Id" class="btn btn-info btn-sm js-tongle-attendances">Going</button><br/>
+                            }
+                        }
                     </span>
-                    <button data-course-id="@item.Id" class="btn btn-default btn-sm js-tongle-attendances">Going?</button>
                 </div>
 
             </li>
